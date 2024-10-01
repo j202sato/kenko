@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>食事量記入フォーム</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+    <style type="text/css">
+        #submittion {
+            width: 135px;
+            height: 35px;
+            background: linear-gradient(deepskyblue, blue);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        #back {
+            width: 135px;
+            height: 35px;
+            background: linear-gradient(deepskyblue, blue);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        #previous,
+        #next,
+        #show-records {
+            height: 40px;
+            width: 270px;
+            background: linear-gradient(coral, darkorange);
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>食事量記入フォーム</h1>
+    <h2>食事量を記入してください。</h2>
+    <form id="meal-form" action="meal.php" method="POST">
+        <label for="date"><b>日付:</b></label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="breakfast"><b>朝食量:</b></label>
+        <input type="number" id="breakfast" name="breakfast" min="0" max="20000" required>kcal<br><br>
+
+        <label for="lunch"><b>昼食量:</b></label>
+        <input type="number" id="lunch" name="lunch" min="0" max="20000" required>kcal<br><br>
+
+        <label for="dinner"><b>夕食量:</b></label>
+        <input type="number" id="dinner" name="dinner" min="0" max="20000" required>kcal<br><br>
+
+        <button id="submittion" type="button" onclick="recordMeal()">
+            <font color="white">保存</font>
+        </button><br><br>
+        <button id="back" type="button" onclick="location.href='record.html'">
+            <font color="white">戻る</font>
+        </button><br><br>
+        <button id="show-records" type="button" onclick="showPastRecords()">
+            <font color="white">過去の記録</font>
+        </button>
+        <button id="previous" type="button" style="display:none;" onclick="changeWeek(-1)">
+            <font color="white">前の週</font>
+        </button>
+        <button id="next" type="button" style="display:none;" onclick="changeWeek(1)">
+            <font color="white">次の週</font>
+        </button>
+    </form>
+
+    <div id="message"></div>
+    <button id="back-button" style="display:none;" onclick="goBack()">戻る</button>
+
+    <canvas id="meal-chart" style="display:none;"></canvas>
+</body>
+
+</html>

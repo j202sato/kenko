@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>睡眠時間記入フォーム</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script2.js" defer></script>
+    <style>
+        #submittion, #back {
+            width: 135px;
+            height: 35px;
+            background: linear-gradient(deepskyblue, blue);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        #show-records, #previous, #next {
+            height: 40px;
+            width: 270px;
+            background: linear-gradient(coral, darkorange);
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>睡眠時間記入フォーム</h1>
+    <h2>睡眠時間を記入してください。</h2>
+    <form id="sleep-form" action="sleep.php" method="POST">
+        日付:</b>
+        <input type="date" id="date" name="date" required><br><br>
+
+        就寝時間:</b>
+        <input type="time" id="bedTime" name="bedTime" required><br><br>
+        
+        起床時間:</b>
+        <input type="time" id="wakeUpTime" name="wakeUpTime" required><br><br>
+
+        <button id="submittion" type="button" onclick="recordSleep()">
+            <font color="white">保存</font>
+        </button><br><br>
+        <button id="back" type="button" onclick="location.href='record.html'">
+            <font color="white">戻る</font>
+        </button><br><br>
+        <button id="show-records" type="button" onclick="showPastRecords()">
+            <font color="white">過去の記録</font>
+        </button>
+        <button id="previous" type="button" style="display:none;" onclick="changeWeek(-1)">
+            <font color="white">前の週</font>
+        </button>
+        <button id="next" type="button" style="display:none;" onclick="changeWeek(1)">
+            <font color="white">次の週</font>
+        </button>
+    </form>
+
+    <div id="message"></div>
+    <button id="back-button" style="display:none;" onclick="goBack()">戻る</button>
+
+    <canvas id="sleep-chart" style="width: 100px; height: 50px; display:none;"></canvas>
+    
+    <table id="sleep-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>起床時間</th>
+                <th>就寝時間</th>
+                <th>睡眠時間</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>
