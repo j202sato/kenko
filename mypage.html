@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="home.html">ホーム</a>
+        <a href="record.html">記録</a>
+        <a href="mypage.html">マイページ</a>
+        <a href="settings.html">サウンド</a>
+        <a href="basic_data.html">基本データ入力</a>
+        <a href="logout.html">ログアウト</a>
+    </div>
+    <div class="content">
+        <h1>マイページ</h1>
+        <p>ユーザー名: <span id="username"></span></p>
+        <p>メールアドレス: <span id="email"></span></p>
+        <p>身長: <span id="height"></span>cm </p>
+        <p>体重: <span id="weight"></span>kg </p>
+        <p>年齢: <span id="age"></span>歳</p>
+        <p>性別: <span id="gender"></span></p>
+        <p>BMI: <span id="bmi"></span></p>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('ユーザーがログインしていません。');
+                return;
+            }
+            const userData = JSON.parse(localStorage.getItem(currentUser +
+                '_data')) || {};
+            const user = JSON.parse(localStorage.getItem('users')).find(u =>
+                u.username === currentUser);
+            document.getElementById('username').innerText = currentUser;
+            document.getElementById('email').innerText = user.email || '入力されていません';
+            document.getElementById('height').innerText = userData.height || '入力されていません';
+            document.getElementById('weight').innerText = userData.weight || '入力されていません';
+            document.getElementById('age').innerText = userData.age || '入力されていません';
+            document.getElementById('gender').innerText = userData.gender || '選択されていません';
+            document.getElementById('bmi').innerText = userData.bmi||'まだ入力されていません';
+        }); 
+    </script>
+</body>
+
+</html>
